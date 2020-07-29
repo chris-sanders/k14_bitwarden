@@ -4,3 +4,23 @@
 ---
 #@overlay/remove
 status: {}
+
+#@overlay/match by=overlay.subset({"kind": "CronJob"}), when="1+"
+---
+spec:
+  jobTemplate:
+    spec:
+      template:
+        #@overlay/match-child-defaults missing_ok=True
+        spec:
+          affinity:
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: app.kubernetes.io/name
+                    operator: In
+                    values:
+                    - bitwarden
+                topologyKey: kubernetes.io/hostname
+
