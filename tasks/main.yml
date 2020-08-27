@@ -1,4 +1,5 @@
 ---
-- name: Include k14
+- name: Bitwarden
   include_role:
       name: k14
+  tags: bitwarden
