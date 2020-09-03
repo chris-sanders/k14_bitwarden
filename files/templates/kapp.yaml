@@ -1,0 +1,34 @@
+---
+apiVersion: kapp.k14s.io/v1alpha1
+kind: Config
+
+rebaseRules:
+# Copy over annotations (calico is added by the cluster)
+- path: [metadata, annotations]
+  type: copy
+  sources: [existing, new]
+  resourceMatchers:
+  - apiVersionKindMatcher: {apiVersion: v1, kind: Pod}
+
+changeGroupBindings:
+# Create a change group for everything but the test pod
+- name: change-groups.kapp.k14s.io/app
+  resourceMatchers:
+  #- apiVersionKindMatcher:
+  #    apiVersion: v1
+  #    kind: PersistentVolumeClaim
+  - notMatcher:
+      matcher:
+        apiVersionKindMatcher:
+          apiVersion: v1
+          kind: Pod
+
+changeRuleBindings:
+# Install test pod last
+- rules:
+  - "upsert after upserting change-groups.kapp.k14s.io/app"
+  ignoreIfCyclical: false
+  resourceMatchers:
+  - apiVersionKindMatcher:
+      apiVersion: v1
+      kind: Pod
