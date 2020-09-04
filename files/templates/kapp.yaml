@@ -4,7 +4,9 @@ kind: Config
 
 rebaseRules:
 # Copy over annotations (calico is added by the cluster)
-- path: [metadata, annotations]
+- paths: 
+  - [metadata, annotations, cni.projectcalico.org/podIP]
+  - [metadata, annotations, cni.projectcalico.org/podIPs]
   type: copy
   sources: [existing, new]
   resourceMatchers:
@@ -14,9 +16,6 @@ changeGroupBindings:
 # Create a change group for everything but the test pod
 - name: change-groups.kapp.k14s.io/app
   resourceMatchers:
-  #- apiVersionKindMatcher:
-  #    apiVersion: v1
-  #    kind: PersistentVolumeClaim
   - notMatcher:
       matcher:
         apiVersionKindMatcher:
