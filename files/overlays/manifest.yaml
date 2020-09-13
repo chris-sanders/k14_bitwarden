@@ -24,3 +24,10 @@ spec:
                     - bitwarden
                 topologyKey: kubernetes.io/hostname
   schedule: '0 3 * * *'
+
+#@overlay/match by=overlay.subset({"kind": "ConfigMap"}), when="1+"
+---
+#@overlay/match-child-defaults missing_ok=True
+metadata:
+    annotations:
+        kapp.k14s.io/versioned: ""
