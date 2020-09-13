@@ -3,6 +3,14 @@
 name: "helm-values"
 ingress:
     enabled: #@ data.values.bitwarden.ingress
+bitwarden:
+    # Allow registration of new users
+    # See: https://github.com/dani-garcia/bitwarden_rs#disable-registration-of-new-users
+    signups_allowed: #@ data.values.bitwarden.signups_allowed
+
+    # Allow current users invite new users even if registrations are otherwise disabled.
+    # See: https://github.com/dani-garcia/bitwarden_rs#disable-invitations
+    invitations_allowed: #@ data.values.bitwarden.invitations_allowed
 deployment:
     image:
         repository: #@ data.values.bitwarden.repository

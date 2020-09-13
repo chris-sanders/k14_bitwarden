@@ -6,3 +6,5 @@ bitwarden:
     ingress: false
     repository: bitwardenrs/server
     tag: latest
+    signups_allowed: true
+    invitations_allowed: true
