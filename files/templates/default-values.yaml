@@ -8,3 +8,5 @@ bitwarden:
     tag: latest
     signups_allowed: true
     invitations_allowed: true
+    storage_size: 100Mi
+    backup_size: 100Mi

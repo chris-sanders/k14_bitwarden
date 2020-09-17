@@ -15,3 +15,7 @@ deployment:
     image:
         repository: #@ data.values.bitwarden.repository
         tag: #@ data.values.bitwarden.tag
+storage:
+    size: #@ data.values.bitwarden.storage_size
+backup:
+    size: #@ data.values.bitwarden.backup_size
