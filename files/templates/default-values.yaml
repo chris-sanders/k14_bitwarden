@@ -10,3 +10,5 @@ bitwarden:
     invitations_allowed: true
     storage_size: 100Mi
     backup_size: 100Mi
+    smtp_port: 587
+    smtp_ssl: true

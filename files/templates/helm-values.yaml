@@ -11,6 +11,17 @@ bitwarden:
     # Allow current users invite new users even if registrations are otherwise disabled.
     # See: https://github.com/dani-garcia/bitwarden_rs#disable-invitations
     invitations_allowed: #@ data.values.bitwarden.invitations_allowed
+
+    #@ if hasattr(data.values.bitwarden, "smtp_host"):
+    smtp_host: #@ data.values.bitwarden.smtp_host
+    smtp_from: #@ data.values.bitwarden.smtp_from
+    smtp_port: #@ data.values.bitwarden.smtp_port
+    smtp_ssl: #@ data.values.bitwarden.smtp_ssl
+    smtp_username: #@ data.values.bitwarden.smtp_username
+    smtp_password: #@ data.values.bitwarden.smtp_password 
+    domain: #@ data.values.bitwarden.domain 
+    #@ end
+
 deployment:
     image:
         repository: #@ data.values.bitwarden.repository
